@@ -1,0 +1,43 @@
+version: '2'
+services:
+  sites-web:
+    build: .
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:80"
+    links:
+      - sites-php
+  sites-php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php-fpm
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "9000:9000"
+    links:
+      - sites-mysql
+  sites-mysql:
+    image: mariadb
+    volumes:
+      - /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: sites-mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pass
+  sites-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    links:
+      - sites-mysql
+    ports:
+      - "8002:80"
+    environment:
+      PMA_HOST: sites-mysql
+      PMA_USER: root
+      PMA_PASSWORD: pass
+    volumes:
+      - /sessions
+
