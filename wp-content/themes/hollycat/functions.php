@@ -11,4 +11,6 @@
         'name'        => __( 'posts-category-sidebar', $text_domain ),
         'description' => __( 'This sidebar is located in archive page', $text_domain ),
     ) );
+
+    add_image_size( review_thumbnail, 100, 100, true );
 ?>

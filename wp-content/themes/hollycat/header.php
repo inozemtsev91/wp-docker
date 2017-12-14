@@ -8,9 +8,11 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="site-logo"><?php
-        if ( function_exists( 'the_custom_logo' ) ) {
-            the_custom_logo();
-        }
-    ?></div>
-    <?php wp_nav_menu(array('top')); ?>
+    <div class="site-header">
+        <div class="site-logo"><?php
+            if ( function_exists( 'the_custom_logo' ) ) {
+                the_custom_logo();
+            }
+            ?></div>
+        <?php wp_nav_menu(array('top')); ?>
+    </div>
